@@ -11,10 +11,18 @@ import MapKit
 import CoreLocation
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
+    @IBOutlet weak var hougakuView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var hougakuView: UIView!
+    
+    @IBOutlet weak var selectView: UIView!
+    @IBOutlet weak var selectHougakuButton: UIButton!
+    @IBOutlet weak var selectKyoriButton: UIButton!
+    
+    var kyoriCount = 0
     
     //マップキット
     @IBOutlet weak var mapView: MKMapView!
@@ -25,10 +33,18 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hougakuView.isHidden = true
+        
         mapView.mapType = .mutedStandard
+        
+        //角丸
         hougakuView.layer.cornerRadius = 20
         button.layer.cornerRadius = 20
         label.layer.cornerRadius = 20
+        imageView.layer.cornerRadius = 20
+        selectView.layer.cornerRadius = 20
+        selectHougakuButton.layer.cornerRadius = 20
+        selectKyoriButton.layer.cornerRadius = 20
         
         button.setTitle("ストップ", for: [])
         
@@ -50,10 +66,27 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 break
             }
         }
-        
-       
-        
     }
+    
+    @IBAction func selectHougaku(_ sender: Any) {
+        selectView.isHidden = true
+        hougakuView.isHidden = false
+        countLabel.isHidden = true
+        titleLabel.text = "方角を決めよう！"
+        label.text = "ストップを押してね！"
+    }
+    
+    @IBAction func selectKyori(_ sender: Any) {
+        selectView.isHidden = true
+        hougakuView.isHidden = false
+        imageView.isHidden = true
+        titleLabel.text = "距離を決めよう！"
+        label.text = "ストップを押してね！"
+    }
+    
+    @IBAction func startAndStopButton(_ sender: Any) {
+    }
+    
     
     func initMap() {
         // 縮尺を設定
