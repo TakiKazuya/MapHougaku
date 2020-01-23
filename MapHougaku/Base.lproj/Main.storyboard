@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <view alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v0f-LF-6k6">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v0f-LF-6k6">
                                 <rect key="frame" x="57" y="148" width="300" height="600"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -50,6 +50,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="button" destination="RLg-4S-TYM" id="lIP-cu-pxJ"/>
+                        <outlet property="hougakuView" destination="v0f-LF-6k6" id="dtW-2D-TgS"/>
+                        <outlet property="imageView" destination="dUI-K0-tsm" id="TIN-xu-RKX"/>
+                        <outlet property="label" destination="OhQ-Vi-V3B" id="uHV-wU-wPr"/>
                         <outlet property="mapView" destination="5na-hF-5kp" id="SoS-o1-itV"/>
                     </connections>
                 </viewController>

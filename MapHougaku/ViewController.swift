@@ -11,6 +11,10 @@ import MapKit
 import CoreLocation
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var hougakuView: UIView!
     
     //マップキット
     @IBOutlet weak var mapView: MKMapView!
@@ -20,6 +24,13 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mapView.mapType = .mutedStandard
+        hougakuView.layer.cornerRadius = 20
+        button.layer.cornerRadius = 20
+        label.layer.cornerRadius = 20
+        
+        button.setTitle("ストップ", for: [])
         
         //ここからが現在地取得の処理
         locManager = CLLocationManager()
@@ -40,7 +51,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             }
         }
         
-        mapView.mapType = .mutedStandard
+       
         
     }
     
