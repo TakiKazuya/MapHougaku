@@ -19,6 +19,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var button: UIButton!
     
     @IBOutlet weak var selectView: UIView!
+    
     @IBOutlet weak var selectHougakuButton: UIButton!
     @IBOutlet weak var selectKyoriButton: UIButton!
     
@@ -37,9 +38,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var selectKyori = false
     var selectHougaku = false
     
+    //すでにボタンが押されているか判別
+    var tappedButton = false
+    
     //文字列型を用意する
     var hougakuString = String()
     var kyoriString = String()
+    
+    var select = 0
     
     //マップキット
     @IBOutlet weak var mapView: MKMapView!
@@ -99,8 +105,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         hougakuView.isHidden = false
         countLabel.isHidden = true
         
-        //どちらのボタンが押されたか判別する
-        selectKyori = false
+        //方角ボタンを押した
         selectHougaku = true
         
         titleLabel.text = "方角を決めよう！"
@@ -113,9 +118,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         hougakuView.isHidden = false
         imageView.isHidden = true
         
-        //どちらのボタンが押されたか判別する
+        //距離ボタンを押した
         selectKyori = true
-        selectHougaku = false
         
         titleLabel.text = "距離を決めよう！"
         label.text = "ストップを押してね！"
@@ -123,19 +127,31 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func startAndStopButton(_ sender: Any) {
-        //距離タイマーが回っている時にストップボタンが押されたら
-        if selectKyori == true {
+        //どちらのタイマーが回っているか判別する
+        if kyoriTimer != nil && tappedButton == false{ //距離タイマーが回っていて、まだボタンが一度も押されていない場合　→ 止める
             kyoriTimer.invalidate()
             kyoriTimer = nil
             kyoriString = "\(kyoriCount)歩"
-        
-        //方角タイマーが回っている時にストップボタンが押されたら
-        }else if selectHougaku == true{
+            label.text = kyoriString
+            button.setTitle("方角を決める", for: [])
+            tappedButton = true
+            
+            if kyoriTimer != nil && tappedButton == true{
+                kyoriTimer.invalidate()
+                kyoriTimer = nil
+                kyoriString = "\(kyoriCount)歩"
+                label.text = "\(hougakuString)に\(kyoriString)進む"
+                button.setTitle("閉じる", for: [])
+            }
+            
+            
+        }else if hougakuTimer != nil && tappedButton == false{//方角タイマーが回っていて、まだボタンが一度も押されていない場合　→ 止める
             hougakuTimer.invalidate()
             hougakuTimer = nil
+            
             switch hougakuCount {
             case 0:
-                hougakuString = "前に"
+                hougakuString = "前方に"
             case 1:
                 hougakuString = "右に"
             case 2:
@@ -143,10 +159,37 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             case 3:
                 hougakuString = "左に"
             default:
-                print("エラー")
-                label.text = "エラー"
+                hougakuString = "エラー"
+            }
+            
+            label.text = hougakuString
+            button.setTitle("距離を決める", for: [])
+            tappedButton = true
+            
+            if hougakuTimer != nil && tappedButton == true{
+                hougakuTimer.invalidate()
+                hougakuTimer = nil
+                switch hougakuCount {
+                case 0:
+                    hougakuString = "前方に"
+                case 1:
+                    hougakuString = "右に"
+                case 2:
+                    hougakuString = "後ろに"
+                case 3:
+                    hougakuString = "左に"
+                default:
+                    hougakuString = "エラー"
+                }
+                
+                label.text = "\(hougakuString)に\(kyoriString)進む"
+                button.setTitle("閉じる", for: [])
             }
         }
+        
+        
+        
+        
         
     }
     
