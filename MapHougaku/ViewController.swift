@@ -23,6 +23,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var selectKyoriButton: UIButton!
     
     var kyoriCount = 0
+    var kyoriCountArray = [Int]()
+    
+    var hougakuCount = 0
+    var hougakuArray = [String]()
+    var hougakuImageArray = [UIImage]()
+    
+    //タイマー
+    var kyoriTimer:Timer!
+    var hougakuTimer:Timer!
+    
+    //どちらが押されたか判別する
+    var selectKyori = false
+    var selectHougaku = false
+    
     
     //マップキット
     @IBOutlet weak var mapView: MKMapView!
@@ -32,6 +46,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //変数の準備
+        
+        for i in 0...3{
+            let image = UIImage(named: "\(i)")
+            hougakuImageArray.append(image!)
+        }
+        
+        for i in 0...99{
+            kyoriCountArray.append(i)
+        }
         
         hougakuView.isHidden = true
         
@@ -51,9 +76,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         //ここからが現在地取得の処理
         locManager = CLLocationManager()
         locManager.delegate = self
-        
         initMap()
-        
         // 位置情報の使用の許可を得る
         locManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -68,24 +91,68 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }
     }
     
-    @IBAction func selectHougaku(_ sender: Any) {
+    @IBAction func tapHougakuButton(_ sender: Any) {
         selectView.isHidden = true
         hougakuView.isHidden = false
         countLabel.isHidden = true
+        
+        //どちらのボタンが押されたか判別する
+        selectKyori = false
+        selectHougaku = true
+        
         titleLabel.text = "方角を決めよう！"
         label.text = "ストップを押してね！"
     }
     
-    @IBAction func selectKyori(_ sender: Any) {
+    @IBAction func tapKyoriButton(_ sender: Any) {
         selectView.isHidden = true
         hougakuView.isHidden = false
         imageView.isHidden = true
+        
+        //どちらのボタンが押されたか判別する
+        selectKyori = true
+        selectHougaku = false
+        
         titleLabel.text = "距離を決めよう！"
         label.text = "ストップを押してね！"
+        kyoriStartTimer()
     }
     
     @IBAction func startAndStopButton(_ sender: Any) {
+        //距離タイマーが回っている時にストップボタンが押されたら
+        if selectKyori == true {
+            kyoriTimer.invalidate()
+            kyoriTimer = nil
+            label.text = "\(kyoriCount)歩"
+        
+        //方角タイマーが回っている時にストップボタンが押されたら
+        }else if selectHougaku == true{
+            hougakuTimer.invalidate()
+            hougakuTimer = nil
+        }
+        
     }
+    
+    
+    //タイマー系のメソッド
+    func kyoriStartTimer(){
+        kyoriTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(kyoriTimerUpdate), userInfo: nil, repeats: true)
+    }
+    @objc func kyoriTimerUpdate(){
+        kyoriCount += 1
+        if kyoriCount >= kyoriCountArray.count{
+            kyoriCount = 0
+        }
+        countLabel.text = "\(kyoriCountArray[kyoriCount])"
+    }
+    
+    func hougakuStartTimer(){
+        hougakuTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hougakuTimerUpdate), userInfo: nil, repeats: true)
+    }
+    @objc func hougakuTimerUpdate(){
+        
+    }
+    
     
     
     func initMap() {
