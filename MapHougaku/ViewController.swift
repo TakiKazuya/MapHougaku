@@ -11,12 +11,15 @@ import MapKit
 import CoreLocation
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
-    @IBOutlet weak var hougakuView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var rouletteView: UIView! //ルーレット画面
+    @IBOutlet weak var titleLabel: UILabel! //ルーレット画面のタイトル
+    @IBOutlet weak var hougakuImageView: UIImageView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var hougakuButton: UIButton!
+    @IBOutlet weak var kyoriButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
+    
     
     @IBOutlet weak var selectView: UIView!
     
@@ -34,12 +37,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var kyoriTimer:Timer!
     var hougakuTimer:Timer!
     
-    //どちらが押されたか判別する
-    var selectKyori = false
-    var selectHougaku = false
-    
     //すでにボタンが押されているか判別
-    var tappedButton = false
+    var kyoriIsStop = false
+    var hougakuIsStop = false
     
     //文字列型を用意する
     var hougakuString = String()
@@ -67,20 +67,25 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             kyoriCountArray.append(i)
         }
         
-        hougakuView.isHidden = true
+        //アプリ起動時、ルーレット画面は消す
+        rouletteView.isHidden = true
+        closeButton.isHidden = true
         
         mapView.mapType = .mutedStandard
         
         //角丸
-        hougakuView.layer.cornerRadius = 20
-        button.layer.cornerRadius = 20
+        rouletteView.layer.cornerRadius = 20
+        
+        hougakuButton.layer.cornerRadius = 20
+        kyoriButton.layer.cornerRadius = 20
+        closeButton.layer.cornerRadius = 20
+        hougakuImageView.layer.cornerRadius = 20
+        
         label.layer.cornerRadius = 50
-        imageView.layer.cornerRadius = 20
+        
         selectView.layer.cornerRadius = 20
         selectHougakuButton.layer.cornerRadius = 20
         selectKyoriButton.layer.cornerRadius = 20
-        
-        button.setTitle("ストップ", for: [])
         
         //ここからが現在地取得の処理
         locManager = CLLocationManager()
@@ -100,58 +105,83 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }
     }
     
+    
+    //selectViewのボタンを押された時の処理
+    //方角を決めるボタンが押された時
     @IBAction func tapHougakuButton(_ sender: Any) {
-        selectView.isHidden = true
-        hougakuView.isHidden = false
-        countLabel.isHidden = true
+        selectView.isHidden = true //選択画面を消す
+        rouletteView.isHidden = false //ルーレット画面を現す
+        countLabel.isHidden = true //カウントルーレットを消す
         
-        //方角ボタンを押した
-        selectHougaku = true
+        //方角ボタンを表示して、距離ボタンを消す
+        hougakuButton.isHidden = false
+        kyoriButton.isHidden = true
         
         titleLabel.text = "方角を決めよう！"
         label.text = "ストップを押してね！"
         hougakuStartTimer()
     }
     
+    //距離を決めるボタンが押された時
     @IBAction func tapKyoriButton(_ sender: Any) {
-        selectView.isHidden = true
-        hougakuView.isHidden = false
-        imageView.isHidden = true
+        selectView.isHidden = true //選択画面を消す
+        rouletteView.isHidden = false //ルーレット画面を現す
+        hougakuImageView.isHidden = true //方角ルーレットを消す
+        countLabel.isHidden = false
         
-        //距離ボタンを押した
-        selectKyori = true
+        //距離ボタンを表示して、方角ボタンを消す
+        kyoriButton.isHidden = false
+        hougakuButton.isHidden = true
+        
         
         titleLabel.text = "距離を決めよう！"
         label.text = "ストップを押してね！"
         kyoriStartTimer()
     }
     
-    @IBAction func startAndStopButton(_ sender: Any) {
-        //どちらのタイマーが回っているか判別する
-        if kyoriTimer != nil && tappedButton == false{ //距離タイマーが回っていて、まだボタンが一度も押されていない場合　→ 止める
+    
+    //rouletteViewのボタンが押された時の処理
+    
+    @IBAction func kyoriStartAndStop(_ sender: Any) {
+        //止める　方角、距離のどちらも止まっておらず、なおかつ距離タイマーが回っている時
+        if kyoriIsStop == false && hougakuIsStop == false && kyoriTimer != nil{
+            kyoriTimer.invalidate()
+            kyoriTimer = nil
+            kyoriIsStop = true
+            kyoriString = "\(kyoriCount)歩"
+            label.text = kyoriString
+            
+            //距離ボタンを消して、方角ボタンを出す
+            kyoriButton.isHidden = true
+            hougakuButton.isHidden = false
+            
+            //表示した方角ボタンのテキストを変える
+            hougakuButton.setTitle("方角を決める", for: [])
+            
+        }else if hougakuIsStop == true && kyoriTimer == nil{
+            hougakuImageView.isHidden = true
+            countLabel.isHidden = false
+            kyoriStartTimer()
+            kyoriButton.setTitle("ストップ", for: [])
+        }else{
             kyoriTimer.invalidate()
             kyoriTimer = nil
             kyoriString = "\(kyoriCount)歩"
-            label.text = kyoriString
-            button.setTitle("方角を決める", for: [])
-            tappedButton = true
+            label.text = "\(hougakuString)に\(kyoriString)進む"
+            kyoriButton.isHidden = true
+            closeButton.isHidden = false
             
-            if kyoriTimer != nil && tappedButton == true{
-                kyoriTimer.invalidate()
-                kyoriTimer = nil
-                kyoriString = "\(kyoriCount)歩"
-                label.text = "\(hougakuString)に\(kyoriString)進む"
-                button.setTitle("閉じる", for: [])
-            }
-            
-            
-        }else if hougakuTimer != nil && tappedButton == false{//方角タイマーが回っていて、まだボタンが一度も押されていない場合　→ 止める
+        }
+    }
+    
+    @IBAction func hougakuStartAndStop(_ sender: Any) {
+        if kyoriIsStop == false && hougakuIsStop == false && hougakuTimer != nil{
             hougakuTimer.invalidate()
             hougakuTimer = nil
-            
+            hougakuIsStop = true
             switch hougakuCount {
             case 0:
-                hougakuString = "前方に"
+                hougakuString = "前に"
             case 1:
                 hougakuString = "右に"
             case 2:
@@ -161,38 +191,46 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             default:
                 hougakuString = "エラー"
             }
-            
             label.text = hougakuString
-            button.setTitle("距離を決める", for: [])
-            tappedButton = true
             
-            if hougakuTimer != nil && tappedButton == true{
-                hougakuTimer.invalidate()
-                hougakuTimer = nil
-                switch hougakuCount {
-                case 0:
-                    hougakuString = "前方に"
-                case 1:
-                    hougakuString = "右に"
-                case 2:
-                    hougakuString = "後ろに"
-                case 3:
-                    hougakuString = "左に"
-                default:
-                    hougakuString = "エラー"
-                }
-                
-                label.text = "\(hougakuString)に\(kyoriString)進む"
-                button.setTitle("閉じる", for: [])
+            //方角ボタンを消して、距離ボタンを出す
+            hougakuButton.isHidden = true
+            kyoriButton.isHidden = false
+            
+            //表示した距離ボタンのテキストを変える
+            kyoriButton.setTitle("距離を決める", for: [])
+            
+        }else if kyoriIsStop == true && hougakuTimer == nil{
+            hougakuImageView.isHidden = false
+            countLabel.isHidden = true
+            hougakuStartTimer()
+            hougakuButton.setTitle("ストップ", for: [])
+        }else{
+            hougakuTimer.invalidate()
+            hougakuTimer = nil
+            switch hougakuCount {
+            case 0:
+                hougakuString = "前に"
+            case 1:
+                hougakuString = "右に"
+            case 2:
+                hougakuString = "後ろに"
+            case 3:
+                hougakuString = "左に"
+            default:
+                hougakuString = "エラー"
             }
+            label.text = "\(hougakuString)に\(kyoriString)進む"
+            hougakuButton.isHidden = true
+            closeButton.isHidden = false
         }
-        
-        
-        
-        
         
     }
     
+    //閉じるボタンが押された時
+    @IBAction func close(_ sender: Any) {
+        rouletteView.isHidden = true
+    }
     
     //タイマー系のメソッド
     //距離
@@ -216,7 +254,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         if hougakuCount >= hougakuImageArray.count{
             hougakuCount = 0
         }
-        imageView.image = hougakuImageArray[hougakuCount]
+        hougakuImageView.image = hougakuImageArray[hougakuCount]
     }
     
     
