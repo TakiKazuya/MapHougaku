@@ -20,6 +20,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var kyoriButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
+    @IBOutlet weak var selectButton: UIButton!
     
     @IBOutlet weak var selectView: UIView!
     
@@ -55,6 +56,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        selectButton.isHidden = true
         
         //変数の準備
         
@@ -105,13 +108,19 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }
     }
     
+    @IBAction func openSelectView(_ sender: Any) {
+        selectView.isHidden = false
+        selectButton.isHidden = true
+    }
     
     //selectViewのボタンを押された時の処理
     //方角を決めるボタンが押された時
     @IBAction func tapHougakuButton(_ sender: Any) {
+        closeButton.isHidden = true
         selectView.isHidden = true //選択画面を消す
         rouletteView.isHidden = false //ルーレット画面を現す
         countLabel.isHidden = true //カウントルーレットを消す
+        hougakuImageView.isHidden = false //方角ルーレットを現す
         
         //方角ボタンを表示して、距離ボタンを消す
         hougakuButton.isHidden = false
@@ -124,6 +133,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     //距離を決めるボタンが押された時
     @IBAction func tapKyoriButton(_ sender: Any) {
+        closeButton.isHidden = true
         selectView.isHidden = true //選択画面を消す
         rouletteView.isHidden = false //ルーレット画面を現す
         hougakuImageView.isHidden = true //方角ルーレットを消す
@@ -157,8 +167,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             
             //表示した方角ボタンのテキストを変える
             hougakuButton.setTitle("方角を決める", for: [])
-            
+
         }else if hougakuIsStop == true && kyoriTimer == nil{
+            titleLabel.text = "距離を決めよう！"
             hougakuImageView.isHidden = true
             countLabel.isHidden = false
             kyoriStartTimer()
@@ -167,7 +178,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             kyoriTimer.invalidate()
             kyoriTimer = nil
             kyoriString = "\(kyoriCount)歩"
-            label.text = "\(hougakuString)に\(kyoriString)進む"
+            label.text = "\(hougakuString)\(kyoriString)進む"
             kyoriButton.isHidden = true
             closeButton.isHidden = false
             
@@ -201,6 +212,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             kyoriButton.setTitle("距離を決める", for: [])
             
         }else if kyoriIsStop == true && hougakuTimer == nil{
+            titleLabel.text = "方角を決めよう！"
             hougakuImageView.isHidden = false
             countLabel.isHidden = true
             hougakuStartTimer()
@@ -220,7 +232,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             default:
                 hougakuString = "エラー"
             }
-            label.text = "\(hougakuString)に\(kyoriString)進む"
+            label.text = "\(hougakuString)\(kyoriString)進む"
             hougakuButton.isHidden = true
             closeButton.isHidden = false
         }
@@ -230,12 +242,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //閉じるボタンが押された時
     @IBAction func close(_ sender: Any) {
         rouletteView.isHidden = true
+        selectButton.isHidden = false
+        kyoriIsStop = false
+        hougakuIsStop = false
     }
     
     //タイマー系のメソッド
     //距離
     func kyoriStartTimer(){
-        kyoriTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(kyoriTimerUpdate), userInfo: nil, repeats: true)
+        kyoriTimer = Timer.scheduledTimer(timeInterval: 0.005, target: self, selector: #selector(kyoriTimerUpdate), userInfo: nil, repeats: true)
     }
     @objc func kyoriTimerUpdate(){
         kyoriCount += 1
