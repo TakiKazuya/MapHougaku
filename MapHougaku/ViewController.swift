@@ -37,6 +37,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var selectKyori = false
     var selectHougaku = false
     
+    //文字列型を用意する
+    var hougakuString = String()
+    var kyoriString = String()
     
     //マップキット
     @IBOutlet weak var mapView: MKMapView!
@@ -65,7 +68,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         //角丸
         hougakuView.layer.cornerRadius = 20
         button.layer.cornerRadius = 20
-        label.layer.cornerRadius = 20
+        label.layer.cornerRadius = 50
         imageView.layer.cornerRadius = 20
         selectView.layer.cornerRadius = 20
         selectHougakuButton.layer.cornerRadius = 20
@@ -124,18 +127,32 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         if selectKyori == true {
             kyoriTimer.invalidate()
             kyoriTimer = nil
-            label.text = "\(kyoriCount)歩"
+            kyoriString = "\(kyoriCount)歩"
         
         //方角タイマーが回っている時にストップボタンが押されたら
         }else if selectHougaku == true{
             hougakuTimer.invalidate()
             hougakuTimer = nil
+            switch hougakuCount {
+            case 0:
+                hougakuString = "前に"
+            case 1:
+                hougakuString = "右に"
+            case 2:
+                hougakuString = "後ろに"
+            case 3:
+                hougakuString = "左に"
+            default:
+                print("エラー")
+                label.text = "エラー"
+            }
         }
         
     }
     
     
     //タイマー系のメソッド
+    //距離
     func kyoriStartTimer(){
         kyoriTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(kyoriTimerUpdate), userInfo: nil, repeats: true)
     }
@@ -147,8 +164,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         countLabel.text = "\(kyoriCountArray[kyoriCount])"
     }
     
+    //方角
     func hougakuStartTimer(){
-        hougakuTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hougakuTimerUpdate), userInfo: nil, repeats: true)
+        hougakuTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(hougakuTimerUpdate), userInfo: nil, repeats: true)
     }
     @objc func hougakuTimerUpdate(){
         hougakuCount += 1
