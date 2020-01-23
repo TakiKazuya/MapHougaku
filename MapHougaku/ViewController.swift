@@ -102,6 +102,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         titleLabel.text = "方角を決めよう！"
         label.text = "ストップを押してね！"
+        hougakuStartTimer()
     }
     
     @IBAction func tapKyoriButton(_ sender: Any) {
@@ -150,7 +151,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         hougakuTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hougakuTimerUpdate), userInfo: nil, repeats: true)
     }
     @objc func hougakuTimerUpdate(){
-        
+        hougakuCount += 1
+        if hougakuCount >= hougakuImageArray.count{
+            hougakuCount = 0
+        }
+        imageView.image = hougakuImageArray[hougakuCount]
     }
     
     
