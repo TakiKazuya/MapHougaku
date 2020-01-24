@@ -23,9 +23,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var selectButton: UIButton!
     
     @IBOutlet weak var selectView: UIView!
-    
     @IBOutlet weak var selectHougakuButton: UIButton!
     @IBOutlet weak var selectKyoriButton: UIButton!
+    @IBOutlet weak var selectCloseButton: UIView!
     
     var kyoriCount = 0
     var kyoriCountArray = [Int]()
@@ -56,7 +56,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
         selectButton.isHidden = true
         
         //変数の準備
@@ -89,6 +89,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         selectView.layer.cornerRadius = 20
         selectHougakuButton.layer.cornerRadius = 20
         selectKyoriButton.layer.cornerRadius = 20
+        selectCloseButton.layer.cornerRadius = 20
         
         //ここからが現在地取得の処理
         locManager = CLLocationManager()
@@ -149,6 +150,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         kyoriStartTimer()
     }
     
+    //閉じるボタンが押された時
+    @IBAction func closeSelectView(_ sender: Any) {
+        selectView.isHidden = true
+        selectButton.isHidden = false
+    }
     
     //rouletteViewのボタンが押された時の処理
     //距離スタートストップボタンが押された時

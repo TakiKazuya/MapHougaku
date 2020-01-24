@@ -9,7 +9,15 @@
 import UIKit
 
 class HougakuRouletteView: UIView {
-
+    
+    override init(frame: CGRect) {
+        super.init(frame:frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var startAndStopButton: UIButton!
@@ -20,4 +28,11 @@ class HougakuRouletteView: UIView {
     var hougakuImageArray = [UIImage]()
     var hougakuString = String()
     
+    @IBAction func startAndStop(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func close(_ sender: UIButton) {
+        self.removeFromSuperview()
+    }
 }
