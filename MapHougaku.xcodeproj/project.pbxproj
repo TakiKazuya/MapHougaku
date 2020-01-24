@@ -16,6 +16,9 @@
 		A84CD7F623DB101500FB224E /* HougakuRouletteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84CD7F523DB101500FB224E /* HougakuRouletteView.xib */; };
 		A84CD7F823DB102300FB224E /* KyoriRouletteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84CD7F723DB102300FB224E /* KyoriRouletteView.xib */; };
 		A84CD7FA23DB103400FB224E /* SelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84CD7F923DB103400FB224E /* SelectView.xib */; };
+		A84CD7FC23DB451900FB224E /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7FB23DB451900FB224E /* SelectView.swift */; };
+		A84CD7FE23DB453200FB224E /* KyoriRouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */; };
+		A84CD80023DB454600FB224E /* HougakuRouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7FF23DB454600FB224E /* HougakuRouletteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		A84CD7F523DB101500FB224E /* HougakuRouletteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HougakuRouletteView.xib; sourceTree = "<group>"; };
 		A84CD7F723DB102300FB224E /* KyoriRouletteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KyoriRouletteView.xib; sourceTree = "<group>"; };
 		A84CD7F923DB103400FB224E /* SelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectView.xib; sourceTree = "<group>"; };
+		A84CD7FB23DB451900FB224E /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
+		A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyoriRouletteView.swift; sourceTree = "<group>"; };
+		A84CD7FF23DB454600FB224E /* HougakuRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HougakuRouletteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +92,11 @@
 				A84CD7E023D9554800FB224E /* Main.storyboard */,
 				A84CD7E323D9554900FB224E /* Assets.xcassets */,
 				A84CD7F523DB101500FB224E /* HougakuRouletteView.xib */,
+				A84CD7FF23DB454600FB224E /* HougakuRouletteView.swift */,
 				A84CD7F723DB102300FB224E /* KyoriRouletteView.xib */,
+				A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */,
 				A84CD7F923DB103400FB224E /* SelectView.xib */,
+				A84CD7FB23DB451900FB224E /* SelectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,7 +184,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A84CD7DF23D9554800FB224E /* ViewController.swift in Sources */,
+				A84CD80023DB454600FB224E /* HougakuRouletteView.swift in Sources */,
+				A84CD7FE23DB453200FB224E /* KyoriRouletteView.swift in Sources */,
 				A84CD7DB23D9554800FB224E /* AppDelegate.swift in Sources */,
+				A84CD7FC23DB451900FB224E /* SelectView.swift in Sources */,
 				A84CD7DD23D9554800FB224E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
