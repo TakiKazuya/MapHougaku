@@ -151,7 +151,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     
     //rouletteViewのボタンが押された時の処理
-    
+    //距離スタートストップボタンが押された時
     @IBAction func kyoriStartAndStop(_ sender: Any) {
         //止める　方角、距離のどちらも止まっておらず、なおかつ距離タイマーが回っている時
         if kyoriIsStop == false && hougakuIsStop == false && kyoriTimer != nil{
@@ -185,6 +185,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }
     }
     
+    //方角スタートストップボタンが押された時
     @IBAction func hougakuStartAndStop(_ sender: Any) {
         if kyoriIsStop == false && hougakuIsStop == false && hougakuTimer != nil{
             hougakuTimer.invalidate()

@@ -13,6 +13,8 @@
 		A84CD7E223D9554800FB224E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A84CD7E023D9554800FB224E /* Main.storyboard */; };
 		A84CD7E423D9554900FB224E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A84CD7E323D9554900FB224E /* Assets.xcassets */; };
 		A84CD7E723D9554900FB224E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A84CD7E523D9554900FB224E /* LaunchScreen.storyboard */; };
+		A84CD7F223DB0C8E00FB224E /* RouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7F123DB0C8E00FB224E /* RouletteView.swift */; };
+		A84CD7F423DB0CAE00FB224E /* RouletteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84CD7F323DB0CAE00FB224E /* RouletteView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		A84CD7E323D9554900FB224E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A84CD7E623D9554900FB224E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A84CD7E823D9554900FB224E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A84CD7F123DB0C8E00FB224E /* RouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteView.swift; sourceTree = "<group>"; };
+		A84CD7F323DB0CAE00FB224E /* RouletteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouletteView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,41 @@
 		A84CD7D923D9554800FB224E /* MapHougaku */ = {
 			isa = PBXGroup;
 			children = (
-				A84CD7DA23D9554800FB224E /* AppDelegate.swift */,
+				A84CD7EE23DB0C2600FB224E /* Model */,
+				A84CD7EF23DB0C3100FB224E /* View */,
+				A84CD7F023DB0C3800FB224E /* Controller */,
 				A84CD7DC23D9554800FB224E /* SceneDelegate.swift */,
-				A84CD7DE23D9554800FB224E /* ViewController.swift */,
-				A84CD7E023D9554800FB224E /* Main.storyboard */,
-				A84CD7E323D9554900FB224E /* Assets.xcassets */,
+				A84CD7DA23D9554800FB224E /* AppDelegate.swift */,
 				A84CD7E523D9554900FB224E /* LaunchScreen.storyboard */,
 				A84CD7E823D9554900FB224E /* Info.plist */,
 			);
 			path = MapHougaku;
+			sourceTree = "<group>";
+		};
+		A84CD7EE23DB0C2600FB224E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A84CD7EF23DB0C3100FB224E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A84CD7E023D9554800FB224E /* Main.storyboard */,
+				A84CD7E323D9554900FB224E /* Assets.xcassets */,
+				A84CD7F123DB0C8E00FB224E /* RouletteView.swift */,
+				A84CD7F323DB0CAE00FB224E /* RouletteView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A84CD7F023DB0C3800FB224E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A84CD7DE23D9554800FB224E /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A84CD7F423DB0CAE00FB224E /* RouletteView.xib in Resources */,
 				A84CD7E723D9554900FB224E /* LaunchScreen.storyboard in Resources */,
 				A84CD7E423D9554900FB224E /* Assets.xcassets in Resources */,
 				A84CD7E223D9554800FB224E /* Main.storyboard in Resources */,
@@ -138,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A84CD7F223DB0C8E00FB224E /* RouletteView.swift in Sources */,
 				A84CD7DF23D9554800FB224E /* ViewController.swift in Sources */,
 				A84CD7DB23D9554800FB224E /* AppDelegate.swift in Sources */,
 				A84CD7DD23D9554800FB224E /* SceneDelegate.swift in Sources */,
