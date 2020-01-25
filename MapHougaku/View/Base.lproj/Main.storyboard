@@ -139,14 +139,35 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J14-xG-Mjk">
-                                <rect key="frame" x="337" y="48" width="44" height="44"/>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EBB-VG-pUO">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="location.circle" catalog="system"/>
-                                <connections>
-                                    <action selector="openSelectView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fTQ-My-xHV"/>
-                                </connections>
-                            </button>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="移動中・・・" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykI-OY-rel">
+                                        <rect key="frame" x="82" y="34" width="250" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="あと〇〇に〇〇歩！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPP-Hk-HD0">
+                                        <rect key="frame" x="82" y="73" width="250" height="41"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J14-xG-Mjk">
+                                        <rect key="frame" x="340" y="27" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="location.circle" catalog="system"/>
+                                        <connections>
+                                            <action selector="openSelectView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wcw-uK-Qdo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -161,12 +182,14 @@
                         <outlet property="kyoriRouletteView" destination="phz-yQ-PQU" id="Fwh-ZO-0P6"/>
                         <outlet property="label" destination="OhQ-Vi-V3B" id="uHV-wU-wPr"/>
                         <outlet property="mapView" destination="5na-hF-5kp" id="SoS-o1-itV"/>
+                        <outlet property="openSelectViewButton" destination="J14-xG-Mjk" id="4WQ-0H-ppS"/>
                         <outlet property="rouletteView" destination="v0f-LF-6k6" id="vEj-mL-q9k"/>
-                        <outlet property="selectButton" destination="J14-xG-Mjk" id="PGR-yP-LPc"/>
                         <outlet property="selectCloseButton" destination="wXI-fB-4Z2" id="u19-sB-JoB"/>
                         <outlet property="selectHougakuButton" destination="Th8-3W-FCf" id="0kX-MZ-aWl"/>
                         <outlet property="selectKyoriButton" destination="CGi-ZL-32G" id="XBz-N0-h88"/>
                         <outlet property="selectView" destination="dfr-1C-qcd" id="LfR-8e-64D"/>
+                        <outlet property="statusCountLabel" destination="wPP-Hk-HD0" id="R80-Mq-iH4"/>
+                        <outlet property="statusLabel" destination="ykI-OY-rel" id="hOe-vS-OJg"/>
                         <outlet property="titleLabel" destination="8j2-v0-g5i" id="USc-SD-ulM"/>
                     </connections>
                 </viewController>

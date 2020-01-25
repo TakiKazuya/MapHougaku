@@ -20,12 +20,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var kyoriButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
-    @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var openSelectViewButton: UIButton!
     
     @IBOutlet weak var selectView: UIView!
     @IBOutlet weak var selectHougakuButton: UIButton!
     @IBOutlet weak var selectKyoriButton: UIButton!
     @IBOutlet weak var selectCloseButton: UIButton!
+    
+    //上部のビュー
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusCountLabel: UILabel!
+    
     
     var kyoriCount = 0
     var kyoriCountArray = [Int]()
@@ -61,12 +66,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //上部のビュー
+        statusLabel.text = "方角と歩数を決めてください。"
+        statusCountLabel.text = ""
         
         hougakuRouletteView.isHidden = true
         kyoriRouletteView.isHidden = true
         
       
-        selectButton.isHidden = true
+        openSelectViewButton.isHidden = true
         
        
         //変数の準備
@@ -121,7 +129,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     @IBAction func openSelectView(_ sender: Any) {
         selectView.isHidden = false
-        selectButton.isHidden = true
+        openSelectViewButton.isHidden = true
     }
     
     //selectViewのボタンを押された時の処理
@@ -160,10 +168,12 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         kyoriStartTimer()
     }
     
-    //閉じるボタンが押された時
+    //selectViewの閉じるボタンが押された時
     @IBAction func closeSelectView(_ sender: Any) {
         selectView.isHidden = true
-        selectButton.isHidden = false
+        openSelectViewButton.isHidden = false
+        statusLabel.text = "方角と歩数を決めてください。"
+        statusCountLabel.text = ""
     }
     
     //rouletteViewのボタンが押された時の処理
@@ -259,10 +269,12 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //閉じるボタンが押された時
     @IBAction func close(_ sender: Any) {
         rouletteView.isHidden = true
-        selectButton.isHidden = false
+        openSelectViewButton.isHidden = false
         kyoriIsStop = false
         hougakuIsStop = false
         if hougakuCount != nil && kyoriCount != nil {
+            statusCountLabel.text = "あと\(hougakuString)に\(kyoriString)！"
+            statusLabel.text = "移動中・・・"
             let pedmeter = PedmeterModel(kyori: kyoriCount, hougaku: hougakuCount)
         }
     }
