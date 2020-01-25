@@ -11,17 +11,19 @@ import MapKit
 import CoreLocation
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
-    @IBOutlet weak var rouletteView: UIView! //ルーレット画面
+    //ルーレット画面
+    @IBOutlet weak var rouletteView: UIView!
+    //ルーレット画面のパーツ
     @IBOutlet weak var titleLabel: UILabel! //ルーレット画面のタイトル
     @IBOutlet weak var hougakuImageView: UIImageView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var label: UILabel!
+    //ルーレット画面のボタン
     @IBOutlet weak var hougakuButton: UIButton!
     @IBOutlet weak var kyoriButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
-    @IBOutlet weak var openSelectViewButton: UIButton!
-    
+    //セレクトビュー
     @IBOutlet weak var selectView: UIView!
     @IBOutlet weak var selectHougakuButton: UIButton!
     @IBOutlet weak var selectKyoriButton: UIButton!
@@ -30,8 +32,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //上部のビュー
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusCountLabel: UILabel!
+    @IBOutlet weak var openSelectViewButton: UIButton!
     
-    
+    //変数を準備する
     var kyoriCount = 0
     var kyoriCountArray = [Int]()
     
@@ -47,13 +50,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var kyoriIsStop = false
     var hougakuIsStop = false
     
-    //文字列型を用意する
+    //決まった方角と距離をString型にする変数
     var hougakuString = String()
     var kyoriString = String()
     
-    var select = 0
-    
-    //マップキット
+    //マップビュー
     @IBOutlet weak var mapView: MKMapView!
     
     //LocationManagerの生成
@@ -73,41 +74,40 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         hougakuRouletteView.isHidden = true
         kyoriRouletteView.isHidden = true
         
-      
-        openSelectViewButton.isHidden = true
+        
         
        
-        //変数の準備
-        
+        //タイマーで使う配列の中に画像と数字を入れておく
         for i in 0...3{
             let image = UIImage(named: "\(i)")
             hougakuImageArray.append(image!)
         }
-        
         for i in 0...99{
             kyoriCountArray.append(i)
         }
         
-        //アプリ起動時、ルーレット画面は消す
+        //アプリ起動時、ルーレット画面とセレクトビューボタンは消す
         rouletteView.isHidden = true
         closeButton.isHidden = true
+        openSelectViewButton.isHidden = true
         
         mapView.mapType = .mutedStandard
         
         //角丸
+        //ルーレットビューの角丸
         rouletteView.layer.cornerRadius = 20
-        
+        //ルーレットビューの中の部品の角丸
         hougakuButton.layer.cornerRadius = 20
         kyoriButton.layer.cornerRadius = 20
         closeButton.layer.cornerRadius = 20
         hougakuImageView.layer.cornerRadius = 20
-        
         label.layer.cornerRadius = 50
         
+        //セレクトビューの角丸
         selectView.layer.cornerRadius = 20
         selectHougakuButton.layer.cornerRadius = 20
         selectKyoriButton.layer.cornerRadius = 20
-        selectCloseButton.layer.cornerRadius = 20
+        selectCloseButton.layer.cornerRadius = 10
         
         //ここからが現在地取得の処理
         locManager = CLLocationManager()
@@ -173,6 +173,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         selectView.isHidden = true
         openSelectViewButton.isHidden = false
         statusLabel.text = "方角と歩数を決めてください。"
+        statusLabel.textColor = .black
         statusCountLabel.text = ""
     }
     
@@ -273,8 +274,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         kyoriIsStop = false
         hougakuIsStop = false
         if hougakuCount != nil && kyoriCount != nil {
-            statusCountLabel.text = "あと\(hougakuString)に\(kyoriString)！"
+            statusCountLabel.text = "あと\(hougakuString)\(kyoriString)！"
             statusLabel.text = "移動中・・・"
+            statusLabel.textColor = .red
             let pedmeter = PedmeterModel(kyori: kyoriCount, hougaku: hougakuCount)
         }
     }
@@ -282,7 +284,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //タイマー系のメソッド
     //距離
     func kyoriStartTimer(){
-        kyoriTimer = Timer.scheduledTimer(timeInterval: 0.005, target: self, selector: #selector(kyoriTimerUpdate), userInfo: nil, repeats: true)
+        kyoriTimer = Timer.scheduledTimer(timeInterval: 0.003, target: self, selector: #selector(kyoriTimerUpdate), userInfo: nil, repeats: true)
     }
     @objc func kyoriTimerUpdate(){
         kyoriCount += 1
