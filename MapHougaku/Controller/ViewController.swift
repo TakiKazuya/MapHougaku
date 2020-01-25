@@ -25,7 +25,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var selectView: UIView!
     @IBOutlet weak var selectHougakuButton: UIButton!
     @IBOutlet weak var selectKyoriButton: UIButton!
-    @IBOutlet weak var selectCloseButton: UIView!
+    @IBOutlet weak var selectCloseButton: UIButton!
     
     var kyoriCount = 0
     var kyoriCountArray = [Int]()
@@ -54,11 +54,21 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //LocationManagerの生成
     var locManager: CLLocationManager!
     
+    //Xibファイルで作ったViewを呼び出す
+    @IBOutlet weak var hougakuRouletteView: HougakuRouletteView!
+    @IBOutlet weak var kyoriRouletteView: KyoriRouletteView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hougakuRouletteView.isHidden = true
+        kyoriRouletteView.isHidden = true
+        
       
         selectButton.isHidden = true
         
+       
         //変数の準備
         
         for i in 0...3{

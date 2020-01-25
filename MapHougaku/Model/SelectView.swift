@@ -18,18 +18,29 @@ class SelectView: UIView {
         super.init(frame: frame)
         loadNib()
     }
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         loadNib()
     }
-    
-    
     func loadNib(){
-        let view = Bundle.main.loadNibNamed("SelectView", owner: self, options: nil)?.first as! UIView
+        let view = UINib(nibName: "SelectView", bundle: nil).instantiate(withOwner: self, options: nil).first as! UIView
         view.frame = self.bounds
         self.addSubview(view)
     }
+    
+    @IBAction func selectHougaku(_ sender: Any) {
+        self.isHidden = true
+        
+        
+    }
+    @IBAction func selectKyori(_ sender: Any) {
+    }
+    
+    
+    @IBAction func close(_ sender: Any) {
+        self.removeFromSuperview()
+    }
+    
 
  
 }

@@ -1,5 +1,5 @@
 //
-//  HougakuRouletteView.swift
+//  KyoriRouletteView.swift
 //  MapHougaku
 //
 //  Created by 国分和弥 on 2020/01/25.
@@ -8,25 +8,12 @@
 
 import UIKit
 
-class HougakuRouletteView: UIView {
-    
-    @IBOutlet weak var imageView: UIImageView!
+class KyoriRouletteView: UIView {
+
+    @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var startAndStopButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
-    
-    var hougakuCount = 0
-    var hougakuArray = [String]()
-    var hougakuImageArray = [UIImage]()
-    var hougakuString = String()
-    
-    @IBAction func startAndStop(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func close(_ sender: UIButton) {
-        self.removeFromSuperview()
-    }
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -40,8 +27,9 @@ class HougakuRouletteView: UIView {
     
     
     func loadNib(){
-        let view = Bundle.main.loadNibNamed("HougakuRouletteView", owner: self, options: nil)?.first as! UIView
+        let view = UINib(nibName: "KyoriRouletteView", bundle: nil).instantiate(withOwner: self, options: nil).first as! UIView
         view.frame = self.bounds
         self.addSubview(view)
     }
+
 }

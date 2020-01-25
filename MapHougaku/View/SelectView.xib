@@ -30,6 +30,9 @@
                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="進む方角から決める"/>
+                            <connections>
+                                <action selector="selectHougaku:" destination="-1" eventType="touchUpInside" id="B3S-tP-MhU"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kl-Vh-u3g">
                             <rect key="frame" x="10" y="112" width="280" height="80"/>
@@ -38,6 +41,9 @@
                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                             <color key="tintColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                             <state key="normal" title="進む距離から決める"/>
+                            <connections>
+                                <action selector="selectKyori:" destination="-1" eventType="touchUpInside" id="P0C-03-PDY"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBl-J4-9S8">
                             <rect key="frame" x="100" y="200" width="100" height="30"/>
@@ -45,6 +51,9 @@
                             <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
                             <state key="normal" title="閉じる"/>
+                            <connections>
+                                <action selector="close:" destination="-1" eventType="touchUpInside" id="1xD-uf-FrG"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
