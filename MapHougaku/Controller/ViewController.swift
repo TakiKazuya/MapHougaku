@@ -262,6 +262,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         selectButton.isHidden = false
         kyoriIsStop = false
         hougakuIsStop = false
+        if hougakuCount != nil && kyoriCount != nil {
+            let pedmeter = PedmeterModel(kyori: kyoriCount, hougaku: hougakuCount)
+        }
     }
     
     //タイマー系のメソッド

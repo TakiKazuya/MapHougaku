@@ -19,6 +19,7 @@
 		A84CD7FE23DB453200FB224E /* KyoriRouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */; };
 		A84CD80223DC46C300FB224E /* HougakuRouletteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84CD80123DC46C300FB224E /* HougakuRouletteView.xib */; };
 		A84CD80423DC47E200FB224E /* HougakuRouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */; };
+		A84CD80623DC4CC200FB224E /* PedmeterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD80523DC4CC200FB224E /* PedmeterModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyoriRouletteView.swift; sourceTree = "<group>"; };
 		A84CD80123DC46C300FB224E /* HougakuRouletteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HougakuRouletteView.xib; sourceTree = "<group>"; };
 		A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HougakuRouletteView.swift; sourceTree = "<group>"; };
+		A84CD80523DC4CC200FB224E /* PedmeterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedmeterModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				A84CD7FB23DB451900FB224E /* SelectView.swift */,
 				A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */,
 				A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */,
+				A84CD80523DC4CC200FB224E /* PedmeterModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A84CD80623DC4CC200FB224E /* PedmeterModel.swift in Sources */,
 				A84CD7DF23D9554800FB224E /* ViewController.swift in Sources */,
 				A84CD80423DC47E200FB224E /* HougakuRouletteView.swift in Sources */,
 				A84CD7FE23DB453200FB224E /* KyoriRouletteView.swift in Sources */,
