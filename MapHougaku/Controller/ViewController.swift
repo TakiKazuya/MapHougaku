@@ -285,7 +285,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             // 歩数 NSNumber?
                             let step = data!.numberOfSteps
                             self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
-                            if self.kyoriCount == step.intValue{
+                            if (self.kyoriCount - step.intValue) == 0{
                                 self.selectView.isHidden = false
                                 
                                 self.statusLabel.textColor = .black
