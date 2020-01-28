@@ -57,7 +57,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var hougakuString = String()
     var kyoriString = String()
     
-    var counting = false
     
     //マップビュー
     @IBOutlet weak var mapView: MKMapView!
@@ -74,8 +73,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         //上部のビュー
         statusLabel.text = "方角と歩数を決めてください。"
         statusCountLabel.text = ""
-        
-        counting = false
         
         //タイマーで使う配列の中に画像と数字を入れておく
         for i in 0...3{
@@ -175,7 +172,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         statusLabel.text = "方角と歩数を決めてください。"
         statusLabel.textColor = .black
         statusCountLabel.text = ""
-        counting = false
     }
     
     //rouletteViewのボタンが押された時の処理
@@ -195,7 +191,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             
             //表示した方角ボタンのテキストを変える
             hougakuButton.setTitle("方角を決める", for: [])
-
+            
         }else if hougakuIsStop == true && kyoriTimer == nil{
             titleLabel.text = "距離を決めよう！"
             hougakuImageView.isHidden = true
@@ -274,35 +270,35 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         openSelectViewButton.isHidden = false
         kyoriIsStop = false
         hougakuIsStop = false
-        counting = false
+        
         if hougakuCount != nil && kyoriCount != nil {
             statusCountLabel.text = "あと\(hougakuString)\(kyoriString)！"
             statusLabel.text = "移動中・・・"
             statusLabel.textColor = .red
-            counting = true
-            if counting == true{
-                if CMPedometer.isDistanceAvailable(){
-                    self.myPedometer.startUpdates(from: NSDate() as Date) {
-                        (data:CMPedometerData?, error) in
-                        DispatchQueue.main.async { () -> Void in
-                            if(error == nil){
-                                // 歩数 NSNumber?
-                                let step = data!.numberOfSteps
-                                self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
-                                if self.kyoriCount == step.intValue{
-                                    self.selectView.isHidden = false
-                                    self.counting = false
-                                    self.statusLabel.textColor = .black
-                                    self.statusLabel.text = "方角と歩数を決めてください。"
-                                    self.statusCountLabel.text = ""
-                                    self.myPedometer.stopUpdates()
-                                }
+            
+            
+            if CMPedometer.isDistanceAvailable(){
+                self.myPedometer.startUpdates(from: NSDate() as Date) {
+                    (data:CMPedometerData?, error) in
+                    DispatchQueue.main.async { () -> Void in
+                        if(error == nil){
+                            // 歩数 NSNumber?
+                            let step = data!.numberOfSteps
+                            self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
+                            if self.kyoriCount == step.intValue{
+                                self.selectView.isHidden = false
+                                
+                                self.statusLabel.textColor = .black
+                                self.statusLabel.text = "方角と歩数を決めてください。"
+                                self.statusCountLabel.text = ""
+                                self.myPedometer.stopUpdates()
                             }
                         }
                     }
                 }
-                
             }
+            
+            
             
         }
     }
