@@ -281,8 +281,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             statusLabel.textColor = .red
             counting = true
             if counting == true{
-                print("カウント開始")
-                if (CMPedometer.isDistanceAvailable()){
+                if CMPedometer.isDistanceAvailable(){
                     self.myPedometer.startUpdates(from: NSDate() as Date) {
                         (data:CMPedometerData?, error) in
                         DispatchQueue.main.async { () -> Void in
@@ -296,6 +295,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                                     self.statusLabel.textColor = .black
                                     self.statusLabel.text = "方角と歩数を決めてください。"
                                     self.statusCountLabel.text = ""
+                                    self.myPedometer.stopUpdates()
                                 }
                             }
                         }
