@@ -15,21 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phz-yQ-PQU" customClass="KyoriRouletteView" customModule="MapHougaku" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H8N-89-4k7" customClass="HougakuRouletteView" customModule="MapHougaku" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nz7-IX-rIv" customClass="SelectView" customModule="MapHougaku" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5na-hF-5kp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -177,9 +162,7 @@
                         <outlet property="countLabel" destination="k97-CF-Ica" id="7qy-RT-Cfj"/>
                         <outlet property="hougakuButton" destination="RLg-4S-TYM" id="DdL-0c-Ows"/>
                         <outlet property="hougakuImageView" destination="dUI-K0-tsm" id="NAe-yb-5By"/>
-                        <outlet property="hougakuRouletteView" destination="H8N-89-4k7" id="D1l-dz-pdd"/>
                         <outlet property="kyoriButton" destination="89n-1v-1WO" id="zYa-KB-Y2c"/>
-                        <outlet property="kyoriRouletteView" destination="phz-yQ-PQU" id="Fwh-ZO-0P6"/>
                         <outlet property="label" destination="OhQ-Vi-V3B" id="uHV-wU-wPr"/>
                         <outlet property="mapView" destination="5na-hF-5kp" id="SoS-o1-itV"/>
                         <outlet property="openSelectViewButton" destination="J14-xG-Mjk" id="4WQ-0H-ppS"/>

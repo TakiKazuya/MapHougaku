@@ -19,7 +19,8 @@
 		A84CD7FE23DB453200FB224E /* KyoriRouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */; };
 		A84CD80223DC46C300FB224E /* HougakuRouletteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84CD80123DC46C300FB224E /* HougakuRouletteView.xib */; };
 		A84CD80423DC47E200FB224E /* HougakuRouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */; };
-		A84CD80623DC4CC200FB224E /* PedmeterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD80523DC4CC200FB224E /* PedmeterModel.swift */; };
+		A84CD80623DC4CC200FB224E /* PedometerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD80523DC4CC200FB224E /* PedometerModel.swift */; };
+		A89E77FB23DF02000070BCCE /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A89E77FA23DF02000070BCCE /* Main2.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +38,8 @@
 		A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KyoriRouletteView.swift; sourceTree = "<group>"; };
 		A84CD80123DC46C300FB224E /* HougakuRouletteView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HougakuRouletteView.xib; sourceTree = "<group>"; };
 		A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HougakuRouletteView.swift; sourceTree = "<group>"; };
-		A84CD80523DC4CC200FB224E /* PedmeterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedmeterModel.swift; sourceTree = "<group>"; };
+		A84CD80523DC4CC200FB224E /* PedometerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedometerModel.swift; sourceTree = "<group>"; };
+		A89E77FA23DF02000070BCCE /* Main2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				A84CD7D923D9554800FB224E /* MapHougaku */,
+				A89E77FC23DF0AF60070BCCE /* Test */,
 				A84CD7D823D9554800FB224E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,10 +87,7 @@
 		A84CD7EE23DB0C2600FB224E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A84CD7FB23DB451900FB224E /* SelectView.swift */,
-				A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */,
-				A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */,
-				A84CD80523DC4CC200FB224E /* PedmeterModel.swift */,
+				A84CD80523DC4CC200FB224E /* PedometerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -97,9 +97,6 @@
 			children = (
 				A84CD7E023D9554800FB224E /* Main.storyboard */,
 				A84CD7E323D9554900FB224E /* Assets.xcassets */,
-				A84CD7F923DB103400FB224E /* SelectView.xib */,
-				A84CD80123DC46C300FB224E /* HougakuRouletteView.xib */,
-				A84CD7F723DB102300FB224E /* KyoriRouletteView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -110,6 +107,20 @@
 				A84CD7DE23D9554800FB224E /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		A89E77FC23DF0AF60070BCCE /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				A84CD7FB23DB451900FB224E /* SelectView.swift */,
+				A84CD7FD23DB453200FB224E /* KyoriRouletteView.swift */,
+				A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */,
+				A89E77FA23DF02000070BCCE /* Main2.storyboard */,
+				A84CD7F923DB103400FB224E /* SelectView.xib */,
+				A84CD80123DC46C300FB224E /* HougakuRouletteView.xib */,
+				A84CD7F723DB102300FB224E /* KyoriRouletteView.xib */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 			files = (
 				A84CD7FA23DB103400FB224E /* SelectView.xib in Resources */,
 				A84CD7E723D9554900FB224E /* LaunchScreen.storyboard in Resources */,
+				A89E77FB23DF02000070BCCE /* Main2.storyboard in Resources */,
 				A84CD7E423D9554900FB224E /* Assets.xcassets in Resources */,
 				A84CD80223DC46C300FB224E /* HougakuRouletteView.xib in Resources */,
 				A84CD7E223D9554800FB224E /* Main.storyboard in Resources */,
@@ -186,7 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A84CD80623DC4CC200FB224E /* PedmeterModel.swift in Sources */,
+				A84CD80623DC4CC200FB224E /* PedometerModel.swift in Sources */,
 				A84CD7DF23D9554800FB224E /* ViewController.swift in Sources */,
 				A84CD80423DC47E200FB224E /* HougakuRouletteView.swift in Sources */,
 				A84CD7FE23DB453200FB224E /* KyoriRouletteView.swift in Sources */,
