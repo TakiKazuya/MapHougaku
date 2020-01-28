@@ -77,29 +77,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         counting = false
         
-        if counting == true{
-            print("カウント開始")
-            if (CMPedometer.isDistanceAvailable()){
-                self.myPedometer.startUpdates(from: NSDate() as Date) {
-                    (data:CMPedometerData?, error) in
-                    DispatchQueue.main.async { () -> Void in
-                        if(error == nil){
-                            // 歩数 NSNumber?
-                            let step = data!.numberOfSteps
-                            self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
-                        }
-                    }
-                }
-            }
-            statusCountLabel.text = "あと\(hougakuString)\(kyoriString)！"
-            statusLabel.text = "移動中・・・"
-            statusLabel.textColor = .red
-        }else if counting == false{
-            print("方角と歩数未決定")
-            statusLabel.text = "方角と歩数を決めてください。"
-            statusCountLabel.text = ""
-        }
-        
         //タイマーで使う配列の中に画像と数字を入れておく
         for i in 0...3{
             let image = UIImage(named: "\(i)")
@@ -313,6 +290,13 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                                 // 歩数 NSNumber?
                                 let step = data!.numberOfSteps
                                 self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
+                                if self.kyoriCount == step.intValue{
+                                    self.selectView.isHidden = false
+                                    self.counting = false
+                                    self.statusLabel.textColor = .black
+                                    self.statusLabel.text = "方角と歩数を決めてください。"
+                                    self.statusCountLabel.text = ""
+                                }
                             }
                         }
                     }
