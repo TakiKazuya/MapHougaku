@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreMotion
+import PKHUD
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
     //ルーレット画面
@@ -288,6 +289,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             let step = data!.numberOfSteps
                             self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
                             if (self.kyoriCount - step.intValue) <= 0{
+                                HUD.flash(.labeledSuccess(title: "到着しました！", subtitle: ""),delay: 2)
                                 self.selectView.isHidden = false
                                 
                                 self.statusView.backgroundColor = .clear

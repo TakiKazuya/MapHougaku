@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006CB2D71B28EFC4E90C1417 /* Pods_MapHougaku.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA53DF49E75A3714DCD045A /* Pods_MapHougaku.framework */; };
 		A84CD7DB23D9554800FB224E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7DA23D9554800FB224E /* AppDelegate.swift */; };
 		A84CD7DD23D9554800FB224E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7DC23D9554800FB224E /* SceneDelegate.swift */; };
 		A84CD7DF23D9554800FB224E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD7DE23D9554800FB224E /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E83DE1C58019F4CCF1EC94E /* Pods-MapHougaku.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapHougaku.debug.xcconfig"; path = "Target Support Files/Pods-MapHougaku/Pods-MapHougaku.debug.xcconfig"; sourceTree = "<group>"; };
 		A84CD7D723D9554800FB224E /* MapHougaku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapHougaku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A84CD7DA23D9554800FB224E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A84CD7DC23D9554800FB224E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		A84CD80323DC47E200FB224E /* HougakuRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HougakuRouletteView.swift; sourceTree = "<group>"; };
 		A84CD80523DC4CC200FB224E /* PedometerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedometerModel.swift; sourceTree = "<group>"; };
 		A89E77FA23DF02000070BCCE /* Main2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
+		B3719A733B6B9AF6630BB009 /* Pods-MapHougaku.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapHougaku.release.xcconfig"; path = "Target Support Files/Pods-MapHougaku/Pods-MapHougaku.release.xcconfig"; sourceTree = "<group>"; };
+		CEA53DF49E75A3714DCD045A /* Pods_MapHougaku.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapHougaku.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,18 +51,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				006CB2D71B28EFC4E90C1417 /* Pods_MapHougaku.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CA8CABA21FA07AB1740129C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEA53DF49E75A3714DCD045A /* Pods_MapHougaku.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6A934CE1EB8E44363D7A2B9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1E83DE1C58019F4CCF1EC94E /* Pods-MapHougaku.debug.xcconfig */,
+				B3719A733B6B9AF6630BB009 /* Pods-MapHougaku.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A84CD7CE23D9554800FB224E = {
 			isa = PBXGroup;
 			children = (
 				A84CD7D923D9554800FB224E /* MapHougaku */,
 				A89E77FC23DF0AF60070BCCE /* Test */,
 				A84CD7D823D9554800FB224E /* Products */,
+				6A934CE1EB8E44363D7A2B9D /* Pods */,
+				4CA8CABA21FA07AB1740129C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,9 +155,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A84CD7EB23D9554900FB224E /* Build configuration list for PBXNativeTarget "MapHougaku" */;
 			buildPhases = (
+				AE8BDB99BC6D1E6596785D6D /* [CP] Check Pods Manifest.lock */,
 				A84CD7D323D9554800FB224E /* Sources */,
 				A84CD7D423D9554800FB224E /* Frameworks */,
 				A84CD7D523D9554800FB224E /* Resources */,
+				98F92E902517E07A6604A046 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,6 +219,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		98F92E902517E07A6604A046 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapHougaku/Pods-MapHougaku-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapHougaku/Pods-MapHougaku-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapHougaku/Pods-MapHougaku-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE8BDB99BC6D1E6596785D6D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MapHougaku-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A84CD7D323D9554800FB224E /* Sources */ = {
@@ -346,6 +415,7 @@
 		};
 		A84CD7EC23D9554900FB224E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E83DE1C58019F4CCF1EC94E /* Pods-MapHougaku.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -364,6 +434,7 @@
 		};
 		A84CD7ED23D9554900FB224E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3719A733B6B9AF6630BB009 /* Pods-MapHougaku.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
