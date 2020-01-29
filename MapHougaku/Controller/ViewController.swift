@@ -69,11 +69,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.dimsBackground = false
-
+        
+        PKHUD.sharedHUD.contentView.alpha = 0.01
         //上部のビュー
         statusLabel.text = "方角と歩数を決めてください。"
         statusLabel.textColor = .black
@@ -359,29 +358,30 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     func initMap() {
         // 縮尺を設定
         var region:MKCoordinateRegion = mapView.region
-        region.span.latitudeDelta = 0
-        region.span.longitudeDelta = 0
+        region.span.latitudeDelta = 1
+        region.span.longitudeDelta = 1
+        region.center.latitude = 1
+        region.center.longitude = 1
+        
         mapView.setRegion(region,animated:true)
-        
-        
         
         // 現在位置表示の有効化
         mapView.showsUserLocation = true
         // 現在位置設定（デバイスの動きとしてこの時の一回だけ中心位置が現在位置で更新される）
         mapView.userTrackingMode = .followWithHeading
-
+        
     }
-    
     func updateCurrentPos(_ coordinate:CLLocationCoordinate2D) {
         var region:MKCoordinateRegion = mapView.region
         region.center = coordinate
         mapView.setRegion(region,animated:true)
     }
-    
     // CLLocationManagerのdelegate：現在位置取得
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
+        //        updateCurrentPos((locations.last?.coordinate)!)
         mapView.userTrackingMode = .followWithHeading
     }
+    
     
     
 }
