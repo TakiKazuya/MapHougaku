@@ -86,10 +86,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             kyoriCountArray.append(i)
         }
         
-        //アプリ起動時、ルーレット画面とセレクトビューボタンは消す
+        //アプリ起動時、ルーレット画面は消す
         rouletteView.isHidden = true
         closeButton.isHidden = true
-        openSelectViewButton.isHidden = true
+        
         
         //角丸
         //ルーレットビューの角丸
@@ -126,18 +126,26 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func openSelectView(_ sender: Any) {
-        selectView.isHidden = false
-        openSelectViewButton.isHidden = true
+        if selectView.isHidden == true{
+            openSelectView()
+        }else if selectView.isHidden == false{
+            closeSelectView()
+        }
+        if statusView.backgroundColor == .red{
+           stopPedometerAndReset()
+            openSelectViewButton.setTitle("メニュー", for: [])
+        }
     }
     
     //selectViewのボタンを押された時の処理
     //方角を決めるボタンが押された時
     @IBAction func tapHougakuButton(_ sender: Any) {
         closeButton.isHidden = true
-        selectView.isHidden = true //選択画面を消す
+        closeSelectView()//選択画面を消す
         rouletteView.isHidden = false //ルーレット画面を現す
         countLabel.isHidden = true //カウントルーレットを消す
         hougakuImageView.isHidden = false //方角ルーレットを現す
+        openSelectViewButton.isHidden = true
         
         //方角ボタンを表示して、距離ボタンを消す
         hougakuButton.isHidden = false
@@ -150,8 +158,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     //距離を決めるボタンが押された時
     @IBAction func tapKyoriButton(_ sender: Any) {
+        openSelectViewButton.isHidden = true
         closeButton.isHidden = true
-        selectView.isHidden = true //選択画面を消す
+        closeSelectView() //選択画面を消す
         rouletteView.isHidden = false //ルーレット画面を現す
         hougakuImageView.isHidden = true //方角ルーレットを消す
         countLabel.isHidden = false
@@ -168,12 +177,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     //selectViewの閉じるボタンが押された時
     @IBAction func closeSelectView(_ sender: Any) {
-        selectView.isHidden = true
+        closeSelectView()
         openSelectViewButton.isHidden = false
-        statusView.backgroundColor = .clear
-        statusLabel.text = "方角と歩数を決めてください"
-        statusLabel.textColor = .black
-        statusCountLabel.text = ""
+        stopPedometerAndReset()
     }
     
     //rouletteViewのボタンが押された時の処理
@@ -270,6 +276,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBAction func close(_ sender: Any) {
         rouletteView.isHidden = true
         openSelectViewButton.isHidden = false
+        openSelectViewButton.setTitle("終了", for: [])
         kyoriIsStop = false
         hougakuIsStop = false
         
@@ -290,13 +297,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
                             if (self.kyoriCount - step.intValue) <= 0{
                                 HUD.flash(.labeledSuccess(title: "到着しました！", subtitle: "\(self.hougakuString)\(self.kyoriString)歩移動しました"),delay: 2)
-                                self.selectView.isHidden = false
-                                
-                                self.statusView.backgroundColor = .clear
-                                self.statusLabel.textColor = .black
-                                self.statusLabel.text = "方角と歩数を決めてください"
-                                self.statusCountLabel.text = ""
-                                self.myPedometer.stopUpdates()
+                                self.openSelectView()
+                                self.stopPedometerAndReset()
                             }
                         }
                     }
@@ -306,6 +308,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             
             
         }
+    }
+    //細かいメソッド
+    func openSelectView(){
+        selectView.isHidden = false
+    }
+    func closeSelectView(){
+        selectView.isHidden = true
+    }
+    func stopPedometerAndReset(){
+        myPedometer.stopUpdates()
+        statusView.backgroundColor = .clear
+        statusLabel.text = "方角と歩数を決めてください。"
+        statusCountLabel.text = ""
+        statusLabel.textColor = .black
     }
     
     //タイマー系のメソッド

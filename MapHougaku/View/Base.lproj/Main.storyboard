@@ -63,9 +63,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J14-xG-Mjk">
-                                        <rect key="frame" x="340" y="27" width="44" height="44"/>
+                                        <rect key="frame" x="316" y="27" width="90" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="location.circle" catalog="system"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                        <state key="normal" title="メニュー">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="openSelectView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wcw-uK-Qdo"/>
                                         </connections>
@@ -182,7 +185,4 @@
             <point key="canvasLocation" x="137.68115942028987" y="105.80357142857143"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="location.circle" catalog="system" width="64" height="60"/>
-    </resources>
 </document>
