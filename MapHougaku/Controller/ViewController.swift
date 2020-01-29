@@ -68,6 +68,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.dimsBackground = false
@@ -357,14 +359,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     func initMap() {
         // 縮尺を設定
         var region:MKCoordinateRegion = mapView.region
-        region.span.latitudeDelta = 0.1
-        region.span.longitudeDelta = 0.1
+        region.span.latitudeDelta = 0
+        region.span.longitudeDelta = 0
         mapView.setRegion(region,animated:true)
+        
+        
         
         // 現在位置表示の有効化
         mapView.showsUserLocation = true
         // 現在位置設定（デバイスの動きとしてこの時の一回だけ中心位置が現在位置で更新される）
-        mapView.userTrackingMode = .follow
+        mapView.userTrackingMode = .followWithHeading
+
     }
     
     func updateCurrentPos(_ coordinate:CLLocationCoordinate2D) {
