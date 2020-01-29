@@ -31,6 +31,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var selectCloseButton: UIButton!
     
     //上部のビュー
+    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var statusCountLabel: UILabel!
     @IBOutlet weak var openSelectViewButton: UIButton!
@@ -70,8 +71,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         super.viewDidLoad()
 
         //上部のビュー
+        statusView.backgroundColor = .clear
         statusLabel.text = "方角と歩数を決めてください。"
         statusCountLabel.text = ""
+        statusLabel.textColor = .black
         
         //タイマーで使う配列の中に画像と数字を入れておく
         for i in 0...3{
@@ -166,7 +169,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBAction func closeSelectView(_ sender: Any) {
         selectView.isHidden = true
         openSelectViewButton.isHidden = false
-        statusLabel.text = "方角と歩数を決めてください。"
+        statusView.backgroundColor = .clear
+        statusLabel.text = "方角と歩数を決めてください"
         statusLabel.textColor = .black
         statusCountLabel.text = ""
     }
@@ -270,8 +274,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         if hougakuCount != nil && kyoriCount != nil {
             statusCountLabel.text = "あと\(hougakuString)\(kyoriString)！"
-            statusLabel.text = "移動中・・・"
-            statusLabel.textColor = .red
+            statusView.backgroundColor = .red
+            statusLabel.text = "移動中"
+            statusLabel.textColor = .blue
             
             
             if CMPedometer.isDistanceAvailable(){
@@ -285,8 +290,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             if (self.kyoriCount - step.intValue) <= 0{
                                 self.selectView.isHidden = false
                                 
+                                self.statusView.backgroundColor = .clear
                                 self.statusLabel.textColor = .black
-                                self.statusLabel.text = "方角と歩数を決めてください。"
+                                self.statusLabel.text = "方角と歩数を決めてください"
                                 self.statusCountLabel.text = ""
                                 self.myPedometer.stopUpdates()
                             }
