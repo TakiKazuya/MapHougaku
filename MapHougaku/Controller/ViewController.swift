@@ -43,8 +43,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var hougakuArray = [String]()
     var hougakuImageArray = [UIImage]()
     
-    var stepCount = Int()
-    
     //タイマー
     var kyoriTimer:Timer!
     var hougakuTimer:Timer!

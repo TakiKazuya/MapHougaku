@@ -32,9 +32,7 @@ class PedometerModel{
                     if(error == nil){
                         // 歩数 NSNumber?
                         let step = data!.numberOfSteps
-                        var results:String = String(format:"steps: %d", step.intValue)
-                        self.steps -= step.intValue
-
+                        
                     }
                 }
             }
