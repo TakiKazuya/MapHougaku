@@ -70,6 +70,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         //上部のビュー
         statusLabel.text = "方角と歩数を決めてください。"
         statusCountLabel.text = ""
@@ -87,8 +88,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         rouletteView.isHidden = true
         closeButton.isHidden = true
         openSelectViewButton.isHidden = true
-        
-        mapView.mapType = .mutedStandard
         
         //角丸
         //ルーレットビューの角丸
@@ -285,7 +284,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             // 歩数 NSNumber?
                             let step = data!.numberOfSteps
                             self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
-                            if (self.kyoriCount - step.intValue) == 0{
+                            if (self.kyoriCount - step.intValue) <= 0{
                                 self.selectView.isHidden = false
                                 
                                 self.statusLabel.textColor = .black
@@ -333,8 +332,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     func initMap() {
         // 縮尺を設定
         var region:MKCoordinateRegion = mapView.region
-        region.span.latitudeDelta = 0.02
-        region.span.longitudeDelta = 0.02
+        region.span.latitudeDelta = 0.1
+        region.span.longitudeDelta = 0.1
         mapView.setRegion(region,animated:true)
         
         // 現在位置表示の有効化
@@ -351,7 +350,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     // CLLocationManagerのdelegate：現在位置取得
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
-        mapView.userTrackingMode = .follow
+        mapView.userTrackingMode = .followWithHeading
     }
     
     
