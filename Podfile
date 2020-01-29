@@ -6,6 +6,6 @@ target 'MapHougaku' do
   use_frameworks!
 
   # Pods for MapHougaku
-pod 'PKHUD', '~> 5.0'
+pod 'PKHUD'
 
 end

@@ -71,6 +71,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中", subtitle: "\(self.hougakuString)"),onView: self.view)
+        
+        HUD.flash(.labeledImage(image: UIImage(named: "stopMan"), title: "到着しました", subtitle: ""),onView: view)
+        
+        
         //上部のビュー
         statusView.backgroundColor = .clear
         statusLabel.text = "方角と歩数を決めてください。"
@@ -295,8 +300,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             // 歩数 NSNumber?
                             let step = data!.numberOfSteps
                             self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
+                            HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中", subtitle: "\(self.hougakuString)\(self.kyoriCount - step.intValue)"),onView: self.view)
+                            
                             if (self.kyoriCount - step.intValue) <= 0{
-                                HUD.flash(.labeledSuccess(title: "到着しました！", subtitle: "\(self.hougakuString)\(self.kyoriString)歩移動しました"),delay: 2)
+                                HUD.hide(animated: true)
+                                HUD.flash(.labeledImage(image: UIImage(named: "stopMan"), title: "到着しました", subtitle: ""),onView: self.view,delay: 2)
                                 self.openSelectView()
                                 self.stopPedometerAndReset()
                             }
