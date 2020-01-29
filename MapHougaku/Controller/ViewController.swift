@@ -71,11 +71,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中", subtitle: "\(self.hougakuString)"),onView: self.view)
-        
-        HUD.flash(.labeledImage(image: UIImage(named: "stopMan"), title: "到着しました", subtitle: ""),onView: view)
-        
-        
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
+
         //上部のビュー
         statusView.backgroundColor = .clear
         statusLabel.text = "方角と歩数を決めてください。"
@@ -133,13 +130,16 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBAction func openSelectView(_ sender: Any) {
         if selectView.isHidden == true{
             openSelectView()
+            if statusView.backgroundColor == .red{
+                HUD.hide(animated: true)
+                HUD.flash(.labeledError(title: "中断しました", subtitle: ""),onView: self.view, delay: 2)
+                stopPedometerAndReset()
+                openSelectViewButton.setTitle("メニュー", for: [])
+            }
         }else if selectView.isHidden == false{
             closeSelectView()
         }
-        if statusView.backgroundColor == .red{
-           stopPedometerAndReset()
-            openSelectViewButton.setTitle("メニュー", for: [])
-        }
+        
     }
     
     //selectViewのボタンを押された時の処理
@@ -290,7 +290,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             statusView.backgroundColor = .red
             statusLabel.text = "移動中"
             statusLabel.textColor = .blue
-            
+            HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中", subtitle: "\(self.hougakuString)\(self.kyoriString)"),onView: self.view)
             
             if CMPedometer.isDistanceAvailable(){
                 self.myPedometer.startUpdates(from: NSDate() as Date) {
@@ -300,6 +300,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             // 歩数 NSNumber?
                             let step = data!.numberOfSteps
                             self.statusCountLabel.text = "あと\(self.hougakuString)\(self.kyoriCount - step.intValue)歩！"
+                            HUD.hide()
                             HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中", subtitle: "\(self.hougakuString)\(self.kyoriCount - step.intValue)"),onView: self.view)
                             
                             if (self.kyoriCount - step.intValue) <= 0{
@@ -330,6 +331,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         statusLabel.text = "方角と歩数を決めてください。"
         statusCountLabel.text = ""
         statusLabel.textColor = .black
+        
     }
     
     //タイマー系のメソッド
