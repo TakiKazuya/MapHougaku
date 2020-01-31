@@ -19,6 +19,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IrF-iY-LhL">
+                                <rect key="frame" x="0.0" y="313" width="414" height="583"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dfr-1C-qcd">
                                 <rect key="frame" x="57" y="348" width="300" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -159,6 +164,7 @@
                         <outlet property="countLabel" destination="k97-CF-Ica" id="7qy-RT-Cfj"/>
                         <outlet property="hougakuButton" destination="RLg-4S-TYM" id="DdL-0c-Ows"/>
                         <outlet property="hougakuImageView" destination="dUI-K0-tsm" id="NAe-yb-5By"/>
+                        <outlet property="hudView" destination="IrF-iY-LhL" id="jBk-Sa-1S6"/>
                         <outlet property="kyoriButton" destination="89n-1v-1WO" id="zYa-KB-Y2c"/>
                         <outlet property="label" destination="OhQ-Vi-V3B" id="uHV-wU-wPr"/>
                         <outlet property="mapView" destination="5na-hF-5kp" id="SoS-o1-itV"/>

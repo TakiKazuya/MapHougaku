@@ -25,6 +25,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var kyoriButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
+    @IBOutlet weak var hudView: UIView!
     //セレクトビュー
     @IBOutlet weak var selectView: UIView!
     @IBOutlet weak var selectHougakuButton: UIButton!
@@ -131,7 +132,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             openSelectView()
             if statusLabel.text == ""{
                 HUD.hide(animated: true)
-                HUD.flash(.labeledError(title: "中断しました", subtitle: ""),onView: self.view, delay: 2)
+                HUD.flash(.labeledError(title: "中断しました", subtitle: ""),onView: self.hudView, delay: 2)
                 stopPedometerAndReset()
                 openSelectViewButton.setTitle("メニュー", for: [])
             }
@@ -287,7 +288,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         if hougakuCount != nil && kyoriCount != nil {
             statusLabel.text = ""
             statusLabel.textColor = .blue
-            HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "さあ、出発だ！", subtitle: "\(self.hougakuString)\(self.kyoriString)"),onView: self.view)
+            HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "さあ、出発だ！", subtitle: "\(self.hougakuString)\(self.kyoriString)"),onView: self.hudView)
             
             if CMPedometer.isDistanceAvailable(){
                 self.myPedometer.startUpdates(from: NSDate() as Date) {
@@ -298,11 +299,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             let step = data!.numberOfSteps
                             HUD.hide()
                             HUD.dimsBackground = true
-                            HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中・・・", subtitle: "\(self.hougakuString)\(self.kyoriCount - step.intValue)"),onView: self.view)
+                            HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中・・・", subtitle: "\(self.hougakuString)\(self.kyoriCount - step.intValue)"),onView: self.hudView)
                             
                             if (self.kyoriCount - step.intValue) <= 0{
                                 HUD.hide(animated: true)
-                                HUD.flash(.labeledImage(image: UIImage(named: "stopMan"), title: "到着しました", subtitle: ""),onView: self.view,delay: 2)
+                                HUD.flash(.labeledImage(image: UIImage(named: "stopMan"), title: "到着しました", subtitle: ""),onView: self.hudView,delay: 2)
                                 HUD.dimsBackground = false
                                 self.openSelectView()
                                 self.stopPedometerAndReset()
@@ -356,12 +357,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     
     func initMap() {
-        // 縮尺を設定
-        var region:MKCoordinateRegion = mapView.region
-        region.span.latitudeDelta = 1
-        region.span.longitudeDelta = 1
-        region.center.latitude = 1
-        region.center.longitude = 1
+//        // 縮尺を設定
+//        var region:MKCoordinateRegion = mapView.region
+//        region.span.latitudeDelta = 1
+//        region.span.longitudeDelta = 1
+//        region.center.latitude = 1
+//        region.center.longitude = 1
+//        mapView.centerCoordinate = CLLocationCoordinate2DMake(37.331741, -122.030333)
+        let span : MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+        let region : MKCoordinateRegion = MKCoordinateRegion(center: mapView.centerCoordinate, span: span)
+        
+        
         
         mapView.setRegion(region,animated:true)
         
