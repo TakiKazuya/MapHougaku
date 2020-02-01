@@ -73,7 +73,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = true
         HUD.dimsBackground = false
         
-        PKHUD.sharedHUD.contentView.alpha = 0.01
         //上部のビュー
         statusLabel.text = "方角と歩数を決めてください。"
         statusLabel.textColor = .black
@@ -135,6 +134,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 HUD.flash(.labeledError(title: "中断しました", subtitle: ""),onView: self.hudView, delay: 2)
                 stopPedometerAndReset()
                 openSelectViewButton.setTitle("メニュー", for: [])
+                openSelectViewButton.backgroundColor = .systemTeal
             }
         }else if selectView.isHidden == false{
             closeSelectView()
@@ -282,6 +282,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         rouletteView.isHidden = true
         openSelectViewButton.isHidden = false
         openSelectViewButton.setTitle("終了", for: [])
+        openSelectViewButton.backgroundColor = .red
         kyoriIsStop = false
         hougakuIsStop = false
         
@@ -357,17 +358,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     
     func initMap() {
-//        // 縮尺を設定
-//        var region:MKCoordinateRegion = mapView.region
-//        region.span.latitudeDelta = 1
-//        region.span.longitudeDelta = 1
-//        region.center.latitude = 1
-//        region.center.longitude = 1
-//        mapView.centerCoordinate = CLLocationCoordinate2DMake(37.331741, -122.030333)
         let span : MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
-        let region : MKCoordinateRegion = MKCoordinateRegion(center: mapView.centerCoordinate, span: span)
-        
-        
+        let region : MKCoordinateRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: span)
         
         mapView.setRegion(region,animated:true)
         
@@ -387,8 +379,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         //        updateCurrentPos((locations.last?.coordinate)!)
         mapView.userTrackingMode = .followWithHeading
     }
-    
-    
-    
+   
 }
 
