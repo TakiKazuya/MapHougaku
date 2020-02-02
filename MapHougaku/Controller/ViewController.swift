@@ -12,7 +12,7 @@ import CoreLocation
 import CoreMotion
 import PKHUD
 
-class ViewController: UIViewController,CLLocationManagerDelegate {
+class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelegate {
     //ルーレット画面
     @IBOutlet weak var rouletteView: UIView!
     //ルーレット画面のパーツ
@@ -74,7 +74,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         HUD.dimsBackground = false
         
         //上部のビュー
-        statusLabel.text = "方角と歩数を決めてください。"
+        statusLabel.text = "方角と距離（m）を決めてください。"
         statusLabel.textColor = .black
         
         //タイマーで使う配列の中に画像と数字を入れておく
@@ -111,7 +111,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         //ここからが現在地取得の処理
         locManager = CLLocationManager()
         locManager.delegate = self
-        initMap()
+        
         // 位置情報の使用の許可を得る
         locManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -124,6 +124,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 break
             }
         }
+        initMap()
+        
     }
     
     @IBAction func openSelectView(_ sender: Any) {
@@ -175,7 +177,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         hougakuButton.isHidden = true
         
         
-        titleLabel.text = "距離を決めよう！"
+        titleLabel.text = "距離（m）を決めよう！"
         label.text = "ストップを押してね！"
         kyoriStartTimer()
     }
@@ -195,7 +197,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             kyoriTimer.invalidate()
             kyoriTimer = nil
             kyoriIsStop = true
-            kyoriString = "\(kyoriCount)歩"
+            kyoriString = "\(kyoriCount)m"
             label.text = kyoriString
             
             //距離ボタンを消して、方角ボタンを出す
@@ -206,7 +208,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             hougakuButton.setTitle("方角を決める", for: [])
             
         }else if hougakuIsStop == true && kyoriTimer == nil{
-            titleLabel.text = "距離を決めよう！"
+            titleLabel.text = "距離（m）を決めよう！"
             hougakuImageView.isHidden = true
             countLabel.isHidden = false
             kyoriStartTimer()
@@ -214,7 +216,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }else{
             kyoriTimer.invalidate()
             kyoriTimer = nil
-            kyoriString = "\(kyoriCount)歩"
+            kyoriString = "\(kyoriCount)m"
             label.text = "\(hougakuString)\(kyoriString)進む"
             kyoriButton.isHidden = true
             closeButton.isHidden = false
@@ -247,7 +249,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             kyoriButton.isHidden = false
             
             //表示した距離ボタンのテキストを変える
-            kyoriButton.setTitle("距離を決める", for: [])
+            kyoriButton.setTitle("距離（m）を決める", for: [])
             
         }else if kyoriIsStop == true && hougakuTimer == nil{
             titleLabel.text = "方角を決めよう！"
@@ -299,13 +301,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                             // 歩数 NSNumber?
                             let step = data!.numberOfSteps
                             HUD.hide()
-                            HUD.dimsBackground = true
                             HUD.show(.labeledImage(image: UIImage(named: "runningMan"), title: "移動中・・・", subtitle: "\(self.hougakuString)\(self.kyoriCount - step.intValue)"),onView: self.hudView)
                             
                             if (self.kyoriCount - step.intValue) <= 0{
                                 HUD.hide(animated: true)
                                 HUD.flash(.labeledImage(image: UIImage(named: "stopMan"), title: "到着しました", subtitle: ""),onView: self.hudView,delay: 2)
-                                HUD.dimsBackground = false
                                 self.openSelectView()
                                 self.stopPedometerAndReset()
                             }
@@ -325,7 +325,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     func stopPedometerAndReset(){
         myPedometer.stopUpdates()
-        statusLabel.text = "方角と歩数を決めてください。"
+        statusLabel.text = "方角と距離（m）を決めてください。"
         statusLabel.textColor = .black
         
     }
@@ -358,27 +358,22 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     
     func initMap() {
-        let span : MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
-        let region : MKCoordinateRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: span)
-        
-        mapView.setRegion(region,animated:true)
-        
-        // 現在位置表示の有効化
-        mapView.showsUserLocation = true
-        // 現在位置設定（デバイスの動きとしてこの時の一回だけ中心位置が現在位置で更新される）
-        mapView.userTrackingMode = .followWithHeading
-        
+        if let userLocation = locManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 100, longitudinalMeters: 100)
+            mapView.setRegion(viewRegion, animated: false)
+        }
+        print("ここだよん\(self.mapView.region.span)")
     }
-    func updateCurrentPos(_ coordinate:CLLocationCoordinate2D) {
-        var region:MKCoordinateRegion = mapView.region
-        region.center = coordinate
-        mapView.setRegion(region,animated:true)
-    }
+    
+    
     // CLLocationManagerのdelegate：現在位置取得
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
-        //        updateCurrentPos((locations.last?.coordinate)!)
-        mapView.userTrackingMode = .followWithHeading
+        if let userLocation = locManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 100, longitudinalMeters: 100)
+            mapView.setRegion(viewRegion, animated: false)
+        }
+
     }
-   
+    
 }
 
