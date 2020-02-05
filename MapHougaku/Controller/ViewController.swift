@@ -120,11 +120,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
                 // 座標の表示
                 locManager.startUpdatingLocation()
                 break
+            case .authorizedAlways:
+                locManager.startUpdatingLocation()
+            case .notDetermined:
+                locManager.requestLocation()
             default:
                 break
             }
         }
         initMap()
+        
+        
         
     }
     
@@ -361,6 +367,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
         if let userLocation = locManager.location?.coordinate {
             let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 100, longitudinalMeters: 100)
             mapView.setRegion(viewRegion, animated: false)
+            mapView.userTrackingMode = .followWithHeading
         }
         print("ここだよん\(self.mapView.region.span)")
     }
@@ -369,11 +376,26 @@ class ViewController: UIViewController,CLLocationManagerDelegate,MKMapViewDelega
     // CLLocationManagerのdelegate：現在位置取得
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
         if let userLocation = locManager.location?.coordinate {
+            
             let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 100, longitudinalMeters: 100)
             mapView.setRegion(viewRegion, animated: false)
+            mapView.userTrackingMode = .followWithHeading
         }
 
     }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+         print("error:: \(error.localizedDescription)")
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {if let userLocation = locManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 100, longitudinalMeters: 100)
+            mapView.setRegion(viewRegion, animated: false)
+//            mapView.userTrackingMode = .followWithHeading
+        }
+    }
+
+    
     
 }
 
